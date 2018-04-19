@@ -19,9 +19,7 @@ namespace log4net.Kafka.Appender
 
         public override void ActivateOptions()
         {
-            Console.WriteLine("1");
             base.ActivateOptions();
-            Console.WriteLine("2");
             Start();
 
         }
@@ -29,7 +27,6 @@ namespace log4net.Kafka.Appender
         {
             try
             {
-                Console.WriteLine("3");
                 var conf = new Dictionary<string, object>
                 {
                   { "bootstrap.servers", KafkaSettings.Brokers.First() }
@@ -40,8 +37,7 @@ namespace log4net.Kafka.Appender
                 if (KafkaSettings == null) throw new LogException("KafkaSettings is missing");
 
                 if (KafkaSettings.Brokers == null || KafkaSettings.Brokers.Count == 0) throw new Exception("Broker is not found");
-                Console.WriteLine("4");
-
+                
                 if (producer == null)
                 {
                     var brokers = KafkaSettings.Brokers.Select(x => new Uri(x)).ToArray();
@@ -56,14 +52,12 @@ namespace log4net.Kafka.Appender
             }
             catch (Exception ex)
             {
-                Console.WriteLine("5");
                 ErrorHandler.Error("could not stop producer", ex);
             }
 
         }
         private void Stop()
         {
-            Console.WriteLine("5");
 
             try
             {
@@ -124,8 +118,6 @@ namespace log4net.Kafka.Appender
         }
         protected override void Append(LoggingEvent loggingEvent)
         {
-            Console.WriteLine("6");
-
             var message = GetMessage(loggingEvent);
             var topic = GetTopic(loggingEvent);
             var partition = GetPartition(loggingEvent);
