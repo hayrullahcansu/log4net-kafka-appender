@@ -29,14 +29,13 @@ namespace log4net.Kafka.Appender
         {
             try
             {
+                Console.WriteLine("3");
                 var conf = new Dictionary<string, object>
                 {
-                  { "group.id", "test-consumer-group" },
-                  { "bootstrap.servers", "localhost:9092" },
-                  { "auto.commit.interval.ms", 5000 },
-                  { "auto.offset.reset", "earliest" }
+                  { "bootstrap.servers", KafkaSettings.Brokers.First() }
                 };
-                Console.WriteLine("3");
+                //TODO:  { "bootstrap.servers", KafkaSettings.Brokers.First() }
+                // Apply Multiple brokers
 
                 if (KafkaSettings == null) throw new LogException("KafkaSettings is missing");
 
@@ -52,7 +51,7 @@ namespace log4net.Kafka.Appender
 #else
 					//kafkaOptions.Log = new KafkaLog();
 #endif
-                    //producer = new Producer();
+                    producer = new Producer(conf);
                 }
             }
             catch (Exception ex)
@@ -108,18 +107,34 @@ namespace log4net.Kafka.Appender
                 return sr.ToString();
             }
         }
-
+        private int GetPartition(LoggingEvent loggingEvent)
+        {
+            int partition = 0;
+            if (KafkaSettings.Partition != null)
+            {
+                var sb = new StringBuilder();
+                using (var sw = new StringWriter(sb))
+                {
+                    KafkaSettings.Topic.Format(sw, loggingEvent);
+                    var partitionPattern = sw.ToString();
+                    partition = Utils.Utils.GetPartitionFromPattern(partitionPattern, 0);
+                }
+            }
+            return partition;
+        }
         protected override void Append(LoggingEvent loggingEvent)
         {
             Console.WriteLine("6");
 
             var message = GetMessage(loggingEvent);
             var topic = GetTopic(loggingEvent);
-            Console.WriteLine($"Enabled Status +{KafkaSettings.HashPartitionEnabled}");
-            Console.WriteLine($"Max Partition +{KafkaSettings.NumberMaxPartition}");
-            Console.WriteLine($"Topic +{topic}");
-
-           // producer.ProduceAsync(topic, null, Encoding.UTF8.GetBytes(message));
+            var partition = GetPartition(loggingEvent);
+            Console.WriteLine($"Enabled Status {KafkaSettings.HashPartitionEnabled}");
+            Console.WriteLine($"Max Partition {KafkaSettings.NumberMaxPartition}");
+            Console.WriteLine($"Topic {topic}");
+            Console.WriteLine($"Partition {partition}");
+            var data = Encoding.UTF8.GetBytes(message);
+            producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition);
         }
         protected override void OnClose()
         {
