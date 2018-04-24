@@ -130,8 +130,6 @@ namespace log4net.Kafka.Appender
         }
         protected override void OnClose()
         {
-            Console.WriteLine("7");
-
             base.OnClose();
             Stop();
         }
