@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("log4net.Kafka.Appender")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Log4net Kafka Appender")]
+[assembly: AssemblyDescription("logger-log4net appender for kafka which provides the custom topics pattern and partitions")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("hayrullahcansu")]
 [assembly: AssemblyProduct("log4net.Kafka.Appender")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("log4net.Kafka.Appender")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
