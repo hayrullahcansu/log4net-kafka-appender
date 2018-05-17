@@ -115,7 +115,7 @@ namespace log4net.Kafka.Appender
             var topic = GetTopic(loggingEvent);
             var partition = GetPartition(loggingEvent);
             var data = Encoding.UTF8.GetBytes(message);
-            producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition);
+            producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition).Wait();
         }
         protected override void OnClose()
         {
