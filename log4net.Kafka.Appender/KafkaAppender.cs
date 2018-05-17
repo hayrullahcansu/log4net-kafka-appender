@@ -40,13 +40,6 @@ namespace log4net.Kafka.Appender
                 
                 if (producer == null)
                 {
-                    var brokers = KafkaSettings.Brokers.Select(x => new Uri(x)).ToArray();
-                    // var kafkaOptions = new KafkaOptions(brokers);
-#if DEBUG
-                    //kafkaOptions.Log = new ConsoleLog();
-#else
-					//kafkaOptions.Log = new KafkaLog();
-#endif
                     producer = new Producer(conf);
                 }
             }
@@ -121,10 +114,6 @@ namespace log4net.Kafka.Appender
             var message = GetMessage(loggingEvent);
             var topic = GetTopic(loggingEvent);
             var partition = GetPartition(loggingEvent);
-            Console.WriteLine($"Enabled Status {KafkaSettings.HashPartitionEnabled}");
-            Console.WriteLine($"Max Partition {KafkaSettings.NumberMaxPartition}");
-            Console.WriteLine($"Topic {topic}");
-            Console.WriteLine($"Partition {partition}");
             var data = Encoding.UTF8.GetBytes(message);
             producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition);
         }

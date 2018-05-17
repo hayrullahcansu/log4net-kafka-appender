@@ -18,6 +18,7 @@ namespace log4net.Kafka.Appender.Test
 
 
             logger.Debug("this Debug msg " + DateTime.Now.ToShortTimeString());
+
             //topic pattern  :   testapp-%property{component}-%class-%method-%level
             //the log's topic:   testapp-send-log4net.Kafka.Appender.Test.Program-Main-DEBUG
 
