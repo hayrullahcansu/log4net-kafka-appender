@@ -21,14 +21,6 @@ Install via .NET CLI          dotnet add package log4net.Kafka.Appender --versio
           <!--<conversionPattern value="kafka.logstash.%level" />-->
           <conversionPattern value="appname-%property{component}-%class-%method-%level" />
         </topic>
-        <partition type="log4net.Layout.PatternLayout">
-          <!--<conversionPattern value="kafka.logstash.%level" />-->
-          <conversionPattern value="" />
-        </partition>
-        <configurations>
-          <add key="HashPartitionEnabled" value="false" />
-          <add key="NumberMaxPartition" value="100" />
-        </configurations>
       </KafkaSettings>
       <layout type="log4net.Layout.PatternLayout">
         <conversionPattern value="%d [%t] %-5p %c %m%n" />
