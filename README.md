@@ -15,7 +15,7 @@ Install via .NET CLI          dotnet add package log4net.Kafka.Appender --versio
    <appender name="KafkaAppender" type="log4net.Kafka.Appender.KafkaAppender, log4net.Kafka.Appender">
       <KafkaSettings>
         <brokers>
-          <add value="localhost:9092" />
+          <add value="127.0.0.1:9092" />
         </brokers>
         <topic type="log4net.Layout.PatternLayout">
           <!--<conversionPattern value="kafka.logstash.%level" />-->
