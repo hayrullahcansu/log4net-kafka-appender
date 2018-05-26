@@ -34,7 +34,7 @@ Install via .NET CLI          dotnet add package log4net.Kafka.Appender --versio
 ```
 ## Usage
 
-```
+```cs
 namespace log4net.Kafka.Appender.Test
 {
     class Program
