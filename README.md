@@ -4,8 +4,8 @@ logger-log4net appender for kafka which provides the custom topics pattern and p
 ### Step 1: Install log4net.Kafka.Appender package
 
 ```
-Install via Package-Manager   Install-Package log4net.Kafka.Appender -Version 1.0.0
-Install via .NET CLI          dotnet add package log4net.Kafka.Appender --version 1.0.0
+Install via Package-Manager   Install-Package log4net.Kafka.Appender -Version 1.2.1
+Install via .NET CLI          dotnet add package log4net.Kafka.Appender --version 1.2.1
 ```
 ### Step 2: Configure log4net sections
 
