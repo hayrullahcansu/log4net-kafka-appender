@@ -1,7 +1,7 @@
 # log4net-kafka-appender
 logger-log4net appender for kafka which provides the custom topics pattern and partitions
 ## Getting Started
-### Step 1: Install log4net.Kafka.Appender package from [nuget.org](https://www.nuget.org/packages/log4net.Kafka.Appender/)
+### Step 1: Install log4net.Kafka.Appender package from [nuget.org](https://www.nuget.org/packages/log4net.Kafka.Appender/){:target="_blank"}
 
 ```
 Install via Package-Manager   Install-Package log4net.Kafka.Appender -Version 1.2.1
