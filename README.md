@@ -13,8 +13,8 @@ dotnet core 2.1
 ## Getting Started
 ### Step 1: Install log4net.Kafka.Appender package from [nuget.org](https://www.nuget.org/packages/log4net.Kafka.Appender/)
 ```
-Install via Package-Manager   Install-Package log4net.Kafka.Appender -Version 1.2.1
-Install via .NET CLI          dotnet add package log4net.Kafka.Appender --version 1.2.1
+Install via Package-Manager   Install-Package log4net.Kafka.Appender -Version 1.3.0
+Install via .NET CLI          dotnet add package log4net.Kafka.Appender --version 1.3.0
 ```
 ### Step 2: Configure log4net sections
 
