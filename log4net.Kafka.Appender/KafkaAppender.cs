@@ -37,7 +37,7 @@ namespace log4net.Kafka.Appender
                 if (KafkaSettings == null) throw new LogException("KafkaSettings is missing");
 
                 if (KafkaSettings.Brokers == null || KafkaSettings.Brokers.Count == 0) throw new Exception("Broker is not found");
-                
+
                 if (producer == null)
                 {
                     producer = new Producer(conf);
@@ -111,11 +111,18 @@ namespace log4net.Kafka.Appender
         }
         protected override void Append(LoggingEvent loggingEvent)
         {
-            var message = GetMessage(loggingEvent);
-            var topic = GetTopic(loggingEvent);
-            var partition = GetPartition(loggingEvent);
-            var data = Encoding.UTF8.GetBytes(message);
-            producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition);
+            try
+            {
+                var message = GetMessage(loggingEvent);
+                var topic = GetTopic(loggingEvent);
+                var partition = GetPartition(loggingEvent);
+                var data = Encoding.UTF8.GetBytes(message);
+                producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition);
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Error("could not send message to kafka broker", ex);
+            }
         }
         protected override void OnClose()
         {
