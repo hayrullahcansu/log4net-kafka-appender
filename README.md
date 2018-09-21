@@ -3,18 +3,16 @@ logger-log4net appender for kafka which provides the custom topics pattern and p
 
 ## Supported frameworks 
 ```
-net4.5
-net4.6
-net4.7
-dotnet core 2.0
-dotnet core 2.1
+netstandart2.0+
+net4.5+
+dotnet core 1.0+
 ```
 
 ## Getting Started
 ### Step 1: Install log4net.Kafka.Appender package from [nuget.org](https://www.nuget.org/packages/log4net.Kafka.Appender/)
 ```
-Install via Package-Manager   Install-Package log4net.Kafka.Appender -Version 1.3.0
-Install via .NET CLI          dotnet add package log4net.Kafka.Appender --version 1.3.0
+Install via Package-Manager   Install-Package log4net.Kafka.Appender
+Install via .NET CLI          dotnet add package log4net.Kafka.Appender
 ```
 ### Step 2: Configure log4net sections
 

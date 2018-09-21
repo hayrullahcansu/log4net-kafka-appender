@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.Kafka.Appender", "log4net.Kafka.Appender.csproj", "{C8411B99-229A-4E51-9B52-36A5F9B7C219}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.Kafka.Appender", "log4net.Kafka.Appender\log4net.Kafka.Appender.csproj", "{C8411B99-229A-4E51-9B52-36A5F9B7C219}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.Kafka.Appender.Test", "..\log4net.Kafka.Appender.Test\log4net.Kafka.Appender.Test.csproj", "{C8B57756-5D30-4356-9DD2-DDC9A04C3F87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.Kafka.Appender.Test", "log4net.Kafka.Appender.Test\log4net.Kafka.Appender.Test.csproj", "{C8B57756-5D30-4356-9DD2-DDC9A04C3F87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

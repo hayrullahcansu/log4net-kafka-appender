@@ -10,13 +10,21 @@ using System.Threading.Tasks;
 
 namespace log4net.Kafka.Appender
 {
+    /// <summary>
+    /// log4net KafkaAppender base class implemented from AppenderSkeleton
+    /// </summary>
     public class KafkaAppender : AppenderSkeleton
     {
         private Producer producer;
 
+        /// <summary>
+        /// kafkaSettings
+        /// </summary>
         public KafkaSettings KafkaSettings { get; set; }
 
-
+        /// <summary>
+        /// initilizer
+        /// </summary>
         public override void ActivateOptions()
         {
             base.ActivateOptions();
@@ -109,6 +117,10 @@ namespace log4net.Kafka.Appender
             }
             return partition;
         }
+        /// <summary>
+        /// append log
+        /// </summary>
+        /// <param name="loggingEvent"></param>
         protected override void Append(LoggingEvent loggingEvent)
         {
             try
@@ -124,6 +136,9 @@ namespace log4net.Kafka.Appender
                 ErrorHandler.Error("could not send message to kafka broker", ex);
             }
         }
+        /// <summary>
+        /// onclose
+        /// </summary>
         protected override void OnClose()
         {
             base.OnClose();
