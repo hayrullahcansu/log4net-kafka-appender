@@ -126,7 +126,8 @@ namespace log4net.Kafka.Appender
             try
             {
                 var message = GetMessage(loggingEvent);
-                var topic = GetTopic(loggingEvent);
+                //ToLower(); Confluent.Kafka [0.11.5] can't add topic with uppercase charracters. 
+                var topic = GetTopic(loggingEvent).ToLower();
                 var partition = GetPartition(loggingEvent);
                 var data = Encoding.UTF8.GetBytes(message);
                 producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition);
