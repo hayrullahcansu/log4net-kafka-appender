@@ -11,7 +11,7 @@
     <PackageTags>Kafka;log4net-kafka-appender;librdkafka;kafka-appender;log4net;appender;partition</PackageTags>
     <Title>Log4net Kafka Appender</Title>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.4.1</Version>
+    <Version>1.4.2</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="0.11.5" />

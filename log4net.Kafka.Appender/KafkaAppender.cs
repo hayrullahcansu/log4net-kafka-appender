@@ -126,10 +126,16 @@ namespace log4net.Kafka.Appender
             try
             {
                 var message = GetMessage(loggingEvent);
-                //ToLower(); Confluent.Kafka [0.11.5] can't add topic with uppercase charracters. 
-                var topic = GetTopic(loggingEvent).ToLower();
+                var topic = GetTopic(loggingEvent);
                 var partition = GetPartition(loggingEvent);
                 var data = Encoding.UTF8.GetBytes(message);
+
+#if (NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6 || NETSTANDARD2_0 || NET20 || NETCOREAPP1_0 || NETCOREAPP1_1 || NETCOREAPP2_0 || NETCOREAPP2_1)
+                //log4net couldn't support layoutPattern completely on frameworks defined above
+                //so log4net adding ? charracters unsupported patterns we have to remove from topic to successfully adding to kafka. 
+                topic = topic.Replace("?", "");
+#endif
+
                 producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition);
             }
             catch (Exception ex)
