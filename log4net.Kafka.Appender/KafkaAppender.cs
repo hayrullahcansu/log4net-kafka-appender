@@ -2,11 +2,9 @@
 using log4net.Appender;
 using log4net.Core;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace log4net.Kafka.Appender
 {
@@ -15,7 +13,7 @@ namespace log4net.Kafka.Appender
     /// </summary>
     public class KafkaAppender : AppenderSkeleton
     {
-        private Producer producer;
+        private IProducer<Ignore, string> producer;
 
         /// <summary>
         /// kafkaSettings
@@ -31,16 +29,17 @@ namespace log4net.Kafka.Appender
             Start();
 
         }
+
         private void Start()
         {
             try
             {
-                var conf = new Dictionary<string, object>
-                {
-                  { "bootstrap.servers", KafkaSettings.Brokers.First() }
-                };
                 //TODO:  { "bootstrap.servers", KafkaSettings.Brokers.First() }
                 // Apply Multiple brokers
+                var config = new ProducerConfig
+                {
+                    BootstrapServers = KafkaSettings.Brokers.First()
+                };
 
                 if (KafkaSettings == null) throw new LogException("KafkaSettings is missing");
 
@@ -48,18 +47,17 @@ namespace log4net.Kafka.Appender
 
                 if (producer == null)
                 {
-                    producer = new Producer(conf);
+                    producer = new Producer<Ignore, string>(config, null, Serializers.UTF8);
                 }
             }
             catch (Exception ex)
             {
                 ErrorHandler.Error("could not stop producer", ex);
             }
-
         }
+
         private void Stop()
         {
-
             try
             {
                 producer?.Dispose();
@@ -89,6 +87,7 @@ namespace log4net.Kafka.Appender
 
             return topic;
         }
+
         private string GetMessage(LoggingEvent loggingEvent)
         {
             var sb = new StringBuilder();
@@ -102,6 +101,7 @@ namespace log4net.Kafka.Appender
                 return sr.ToString();
             }
         }
+
         private int GetPartition(LoggingEvent loggingEvent)
         {
             int partition = 0;
@@ -117,6 +117,7 @@ namespace log4net.Kafka.Appender
             }
             return partition;
         }
+
         /// <summary>
         /// append log
         /// </summary>
@@ -136,7 +137,7 @@ namespace log4net.Kafka.Appender
                 topic = topic.Replace("?", "");
 #endif
 
-                producer.ProduceAsync(topic, null, 0, 0, data, 0, data.Length, partition);
+                producer.BeginProduce(topic, new Message<Ignore, string> { Value = message }, null);
             }
             catch (Exception ex)
             {
