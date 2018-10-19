@@ -1,6 +1,10 @@
 # log4net-kafka-appender
 logger-log4net appender for kafka which provides the custom topics pattern and partitions
 
+## General information
+
+This project is forked from [hayrullahcansu/log4net-kafka-appender](hayrullahcansu/log4net-kafka-appender) and updated to support  Confluent.Kafka -Version 1.0-beta2
+
 ## Supported frameworks 
 ```
 netstandart2.0+
