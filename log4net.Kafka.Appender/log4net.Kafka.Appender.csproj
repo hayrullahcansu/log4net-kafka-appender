@@ -10,11 +10,12 @@
     <PackageIconUrl>https://raw.githubusercontent.com/hayrullahcansu/log4net-kafka-appender/master/icon.png</PackageIconUrl>
     <PackageTags>Kafka;log4net-kafka-appender;librdkafka;kafka-appender;log4net;appender;partition</PackageTags>
     <Title>Log4net Kafka Appender</Title>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.4.2</Version>
+    <TargetFrameworks>
+      netstandard2.0;net45;net451;net452;net46;net461;net462;net47;net471;net472;netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2</TargetFrameworks>
+    <Version>1.4.3</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Confluent.Kafka" Version="0.11.5" />
+    <PackageReference Include="Confluent.Kafka" Version="0.11.6" />
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
